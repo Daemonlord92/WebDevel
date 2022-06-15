@@ -1,0 +1,47 @@
+﻿USE [master]
+GO
+IF (EXISTS (SELECT name FROM master.dbo.sysdatabases WHERE ('[' + name + ']' = N'WebDevPortDBCore' OR name = N'WebDevPortDBCore')))
+	DROP DATABASE WebDevPortDBCore
+
+	CREATE DATABASE WebDevPortDBCore
+	GO
+
+	USE WebDevPortDBCore
+	GO
+
+	SET ANSI_NULLS ON
+	GO
+
+	SET QUOTED_IDENTIFIER ON
+	GO
+
+/**DROPPING TABLES ON YOUR DB**/
+
+IF OBJECT_ID('User') IS NOT NULL
+	DROP TABLE [User]
+GO
+
+IF OBJECT_ID('Project') IS NOT NULL
+	DROP TABLE [Project]
+GO
+
+IF OBJECT_ID('BugTracker') IS NOT NULL
+	DROP TABLE [BugTracker]
+GO
+
+/**CREATING TABLES**/
+
+CREATE TABLE [User]
+(
+	[UserId] NUMERIC(3,0) CONSTRAINT pk_User_UserId PRIMARY KEY CONSTRAINT id_User_UserId IDENTITY (100,1) NOT NULL,
+	[Username] VARCHAR(50) CONSTRAINT ck_User_UserUsername CHECK(Username NOT LIKE '[0-9]%') CONSTRAINT uq_User_Username UNIQUE NOT NULL,
+	[Password] VARCHAR(300) NOT NULL,
+	[EmailId] VARCHAR(300) CONSTRAINT uq_User_UserEmailId UNIQUE NOT NULL
+)
+GO
+
+CREATE TABLE [Project]
+(
+	[ProjectId] NUMERIC(4,0) CONSTRAINT pk_Project_ProjectId PRIMARY KEY CONSTRAINT id_Project_ProjectId IDENTITY (1000,1) NOT NULL,
+
+)
