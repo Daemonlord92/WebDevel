@@ -33,7 +33,7 @@ GO
 
 CREATE TABLE [User]
 (
-	[UserId] NUMERIC(3,0) CONSTRAINT pk_User_UserId PRIMARY KEY CONSTRAINT id_User_UserId IDENTITY (100,1) NOT NULL,
+	[UserId] NUMERIC(3,0) CONSTRAINT pk_User_UserId PRIMARY KEY IDENTITY (100,1) NOT NULL,
 	[Username] VARCHAR(50) CONSTRAINT ck_User_UserUsername CHECK(Username NOT LIKE '[0-9]%') CONSTRAINT uq_User_Username UNIQUE NOT NULL,
 	[Password] VARCHAR(300) NOT NULL,
 	[EmailId] VARCHAR(300) CONSTRAINT uq_User_UserEmailId UNIQUE NOT NULL
@@ -42,6 +42,63 @@ GO
 
 CREATE TABLE [Project]
 (
-	[ProjectId] NUMERIC(4,0) CONSTRAINT pk_Project_ProjectId PRIMARY KEY CONSTRAINT id_Project_ProjectId IDENTITY (1000,1) NOT NULL,
-
+	[ProjectId] NUMERIC(4,0) CONSTRAINT pk_Project_ProjectId PRIMARY KEY IDENTITY (1000,1) NOT NULL,
+	[ProjectName] VARCHAR(150) CONSTRAINT uq_Project_ProjectName UNIQUE NOT NULL,
+	[Description] VARCHAR(400) NOT NULL,
+	[ProjectVersion] NUMERIC(3,2) NOT NULL,
+	[GitUrl] VARCHAR(MAX) NOT NULL,
+	[UserId] NUMERIC(3,0) CONSTRAINT fk_Project_UserId FOREIGN KEY REFERENCES [User](UserId)
 )
+GO
+
+CREATE TABLE [BugTracker]
+(
+	[BugId] NUMERIC(6,0) CONSTRAINT pk_BugTracker_BugId PRIMARY KEY IDENTITY(20,2) NOT NULL,
+	[BugName] VARCHAR(150) NOT NULL,
+	[BugDescription] VARCHAR(300) NOT NULL,
+	[GitUrl] VARCHAR(MAX) NOT NULL,
+	[UserId] NUMERIC(3,0) CONSTRAINT fk_BugTracker_UserId FOREIGN KEY REFERENCES [User](UserId)
+)
+GO
+
+/**Stored Procedures**/
+
+CREATE OR ALTER PROCEDURE [dbo].[usp_RegisterUser]
+(
+	@Username VARCHAR(50),
+	@Password VARCHAR(300),
+	@EmailId VARCHAR(300)
+)
+AS
+BEGIN
+	DECLARE @RETVAL INT
+	BEGIN TRY
+	IF(LEN(@EmailId) < 5 OR LEN(@EmailId) > 100 OR (@EmailId IS NULL))
+		SET @RETVAL = -1
+	IF(LEN(@Username) < 4 OR LEN(@Username) > 50 OR (@Username IS NULL))
+		SET @RETVAL = -2
+	ElSE
+	BEGIN
+		INSERT INTO [User]
+		(
+			"Username",
+			"Password",
+			"EmailId"
+		)
+		VALUES
+		(
+			@Username,
+			@Password,
+			@EmailId
+		)
+		SET @RETVAL = 1
+		RETURN @RETVAL
+	END
+RETURN @RETVAL
+END TRY
+BEGIN CATCH
+	SET @RETVAL = -99
+	RETURN @RETVAL
+END CATCH
+END
+GO
