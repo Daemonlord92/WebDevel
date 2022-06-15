@@ -102,3 +102,51 @@ BEGIN CATCH
 END CATCH
 END
 GO
+
+CREATE OR ALTER PROCEDURE [dbo].[usp_PostNewProject]
+(
+	@ProjectName VARCHAR(150),
+	@Description VARCHAR(400),
+	@GitUrl VARCHAR(MAX),
+	@UserId NUMERIC(3,0)
+)
+AS
+BEGIN
+	DECLARE @RETVAL INT
+	DECLARE @ProjectVersion NUMERIC(3,2)
+	BEGIN TRY
+		IF(LEN(@ProjectName) < 4 OR LEN(@ProjectName) > 150 OR (@ProjectName IS NULL))
+			SET @RETVAL = -1
+		IF(LEN(@GitUrl) < 25 OR (@GitUrl IS NULL))
+			SET @RETVAL = -2
+		IF(@UserId IS NULL)
+			SET @RETVAL = -3
+		ELSE
+			BEGIN
+				SET @ProjectVersion = 1.0
+				INSERT INTO [Project]
+				(
+					"ProjectName",
+					"Description",
+					"GitUrl",
+					"ProjectVersion",
+					"UserId"
+				)
+				VALUES
+				(
+					@ProjectName,
+					@Description,
+					@GitUrl,
+					@ProjectVersion,
+					@UserId
+				)
+				SET @RETVAL = 1
+				RETURN @RETVAL
+			END
+	END TRY
+	BEGIN CATCH
+		SET @RETVAL = -99
+		RETURN @RETVAL
+	END CATCH
+END
+GO
