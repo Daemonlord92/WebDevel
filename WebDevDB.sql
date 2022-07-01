@@ -150,3 +150,50 @@ BEGIN
 	END CATCH
 END
 GO
+
+CREATE OR ALTER PROCEDURE [dbo].[usp_PostNewBug]
+(
+	@BugName VARCHAR(150),
+	@BugDescription VARCHAR(300),
+	@GitUrl VARCHAR(MAX),
+	@UserId NUMERIC(3,0)
+)
+AS
+BEGIN
+	DECLARE @RETVAL INT
+	BEGIN TRY
+		IF(LEN(@BugName)<10 OR LEN(@BugName)>150 OR (@BugName IS NULL))
+			SET @RETVAL = -1
+		IF(LEN(@BugDescription)< 25 OR LEN(@BugDescription)>300 OR (@BugDescription IS NULL))
+			SET @RETVAL = -2
+		IF(LEN(@GitUrl)<25 OR (@GitUrl IS NULL))
+			SET @RETVAL = -3
+		IF((@UserId IS NULL))
+			SET @RETVAL = -4
+		ELSE
+		BEGIN
+				INSERT INTO [BugTracker]
+				(
+					"BugName",
+					"BugDescription",
+					"GitUrl",
+					"UserId"
+				)
+				VALUES
+				(
+					@BugName,
+					@BugDescription,
+					@GitUrl,
+					@UserId
+				)
+				SET @RETVAL =1
+				RETURN @RETVAL
+			END
+			
+	END TRY
+	BEGIN CATCH
+		SET @RETVAL = -99
+		RETURN @RETVAL
+	END CATCH
+END
+GO
