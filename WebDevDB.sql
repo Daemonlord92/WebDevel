@@ -151,6 +151,36 @@ BEGIN
 END
 GO
 
+CREATE OR ALTER PROCEDURE [dbo].[usp_DeleteProject]
+(
+	@ProjectId NUMERIC(4,0),
+	@UserId NUMERIC(3,0)
+)
+AS
+BEGIN
+	DECLARE @RETVAL INT
+	BEGIN TRY
+		IF(@ProjectId IS NULL)
+			SET @RETVAL = -1
+		IF(@UserId IS NULL)
+			SET @RETVAL = -2
+		ELSE
+			BEGIN
+				DELETE FROM [Project]
+				WHERE ProjectId = @ProjectId
+				SET @RETVAL = 1
+				RETURN @RETVAL
+			END
+		RETURN @RETVAL
+	END TRY
+	BEGIN CATCH
+		SET @RETVAL = -99
+		RETURN @RETVAL
+	END CATCH
+END
+GO
+
+
 CREATE OR ALTER PROCEDURE [dbo].[usp_PostNewBug]
 (
 	@BugName VARCHAR(150),
