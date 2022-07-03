@@ -221,7 +221,6 @@ BEGIN
 END
 GO
 
-
 CREATE OR ALTER PROCEDURE [dbo].[usp_PostNewBug]
 (
 	@BugName VARCHAR(150),
@@ -261,6 +260,48 @@ BEGIN
 				RETURN @RETVAL
 			END
 			
+	END TRY
+	BEGIN CATCH
+		SET @RETVAL = -99
+		RETURN @RETVAL
+	END CATCH
+END
+GO
+
+CREATE OR ALTER PROCEDURE [dbo].[usp_EditBug]
+(
+	@BugId NUMERIC(6,0),
+	@BugName VARCHAR(150)=NULL,
+	@BugDescription VARCHAR(300)=NULL,
+	@GitUrl VARCHAR(MAX)=NULL,
+	@UserId NUMERIC(3,0)
+)
+AS
+BEGIN
+	DECLARE @RETVAL INT
+	BEGIN TRY
+		IF((@BugId IS NULL) OR (NOT EXISTS(SELECT * FROM [BugTracker] WHERE "BugId" = @BugId)))
+			SET @RETVAL = -1
+		IF((@UserId IS NULL) OR (NOT EXISTS(SELECT * FROM [User] WHERE "UserId" = @UserId)))
+			SET @RETVAL = -2
+		ELSE
+			BEGIN
+				IF(@BugName IS NOT NULL)
+					UPDATE [BugTracker]
+					SET "BugName" = @BugName
+					WHERE "BugId" = @BugId
+				IF(@BugDescription IS NOT NULL)
+					UPDATE [BugTracker]
+					SET "BugDescription" = @BugDescription
+					WHERE "BugId" = @BugId
+				IF(@GitUrl IS NOT NULL)
+					UPDATE [BugTracker]
+					SET "GitUrl" = @GitUrl
+					WHERE "BugId" = @BugId
+				SET @RETVAL = 1
+				RETURN @RETVAL
+			END
+		RETURN @RETVAL
 	END TRY
 	BEGIN CATCH
 		SET @RETVAL = -99
