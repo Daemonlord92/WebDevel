@@ -151,6 +151,47 @@ BEGIN
 END
 GO
 
+CREATE OR ALTER PROCEDURE [dbo].[usp_EditProject]
+(
+	@ProjectId NUMERIC(4,0),
+	@ProjectName VARCHAR(150) = NULL,
+	@Description VARCHAR(400) = NULL,
+	@GitUrl VARCHAR(MAX) = NULL,
+	@UserId NUMERIC(3,0)
+)
+AS
+BEGIN
+	DECLARE @RETVAL INT
+	BEGIN TRY
+		IF((@ProjectId IS NULL) OR (NOT EXISTS(SELECT ProjectId FROM [Project] WHERE ProjectId = @ProjectId)))
+			SET @RETVAL = -1
+		ELSE
+			BEGIN
+				IF(@ProjectName IS NOT NULL)
+					UPDATE [Project]
+					SET "ProjectName" = @ProjectName
+					WHERE "ProjectId" = @ProjectId
+				IF(@Description IS NOT NULL)
+					UPDATE [Project]
+					SET "Description" = @Description
+					WHERE "ProjectId" = @ProjectId
+				IF(@GitUrl IS NOT NULL)
+					UPDATE [Project]
+					SET "GitUrl" = @GitUrl
+					WHERE "ProjectId" = @ProjectId
+				SET @RETVAL = 1
+				RETURN @RETVAL
+			END
+		RETURN @RETVAL
+	END TRY
+	BEGIN CATCH
+		SET @RETVAL = -99
+		RETURN @RETVAL
+	END CATCH
+END
+GO
+
+
 CREATE OR ALTER PROCEDURE [dbo].[usp_DeleteProject]
 (
 	@ProjectId NUMERIC(4,0),
