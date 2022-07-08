@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
+using System.Data.SqlTypes;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -54,6 +55,27 @@ namespace WebDev.DAL.Repo
                 result = -99;
             }
             return (int)result;
+        }
+
+        public int EditProject(int projectId, int userId, string projectName = null, string description = null, string gitUrl = null)
+        {
+            int result;
+            SqlParameter prmProjectId = new SqlParameter("@ProjectId", projectId);
+            SqlParameter prmProjectName = new SqlParameter("@ProjectName", projectName ?? SqlString.Null);
+            SqlParameter prmProjectDescription = new SqlParameter("@Description", description ?? SqlString.Null);
+            SqlParameter prmGitUrl = new SqlParameter("@GitUrl", gitUrl ?? SqlString.Null);
+            SqlParameter prmUserId = new SqlParameter("@UserId", userId);
+
+            try
+            {
+                result = context.Database.ExecuteSqlRaw("EXEC dbo.usp_EditProject @ProjectId, @ProjectName, @Description, @GitUrl, @UserId", new[] { prmProjectId, prmProjectName, prmProjectDescription, prmGitUrl, prmUserId });
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                result = -99;
+            }
+            return result;
         }
     }
 }
