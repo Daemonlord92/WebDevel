@@ -77,5 +77,24 @@ namespace WebDev.DAL.Repo
             }
             return result;
         }
+
+        public int DeleteProject(int projectId, int userId)
+        {
+            int result;
+            SqlParameter prmProjectId = new SqlParameter("@ProjectId", projectId);
+            SqlParameter prmUserId = new SqlParameter("@UserId", userId);
+
+            try
+            {
+                result = context.Database.ExecuteSqlRaw("EXEC dbo.usp_DeleteProject @ProjectId, @UserId", new[] { prmProjectId, prmUserId });
+
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                result = -99;
+            }
+            return result;
+        }
     }
 }
