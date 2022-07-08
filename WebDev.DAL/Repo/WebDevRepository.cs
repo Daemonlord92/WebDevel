@@ -96,5 +96,28 @@ namespace WebDev.DAL.Repo
             }
             return result;
         }
+
+        public int PostNewBug(string bugName, string bugDescription, string gitUrl, int userId)
+        {
+            SqlParameter prmBugName = new SqlParameter("@BugName", bugName);
+            SqlParameter prmBugDescription = new SqlParameter("@BugDescription", bugDescription);
+            SqlParameter prmGitUrl = new SqlParameter("@GitUrl", gitUrl);
+            SqlParameter prmUserId = new SqlParameter("@UserId", userId);
+            int result;
+
+            try 
+	        {	        
+		        result = context.Database.ExecuteSqlRaw("EXEC usp_PostNewBug @BugName, @BugDescription, @GitUrl, @UserId", new[]
+                {
+                    prmBugName, prmBugDescription, prmGitUrl, prmUserId
+                });
+	        }
+	        catch (Exception ex)
+	        {
+                Console.WriteLine(ex.Message);
+		        result = -99;
+	        }
+            return (int)result;
+        }
     }
 }

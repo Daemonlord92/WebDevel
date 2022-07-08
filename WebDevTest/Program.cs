@@ -8,16 +8,21 @@ int status;
 #endregion
 
 #region PostNewProject
-status = repository.PostNewProject("Web Developer Portfolio", "A remaster of my Ruby on Rails Monolithic App.", "https://github.com/Daemonlord92/WebDevel", 100);
-Console.WriteLine(status);
+//status = repository.PostNewProject("Web Developer Portfolio", "A remaster of my Ruby on Rails Monolithic App.", "https://github.com/Daemonlord92/WebDevel", 100);
+//Console.WriteLine(status);
 #endregion
 
 #region EditProject
-status = repository.EditProject(1010, 100, "Web Development Website", null, null);
-Console.WriteLine(status);
+//status = repository.EditProject(1010, 100, "Web Development Website", null, null);
+//Console.WriteLine(status);
 #endregion
 
 #region DeleteProject
-status = repository.DeleteProject(1010, 100);
-Console.WriteLine(status);
+//status = repository.DeleteProject(1010, 100);
+//Console.WriteLine(status);
+#endregion
+
+#region PostNewBug
+//status = repository.PostNewBug("bug/Horrorbank app is rounding the decimal return", "The repository is rounding the result outputted by the database. Currently looking for reasons why, not much to report on.", "Private", 100);
+///Console.WriteLine(status);
 #endregion
