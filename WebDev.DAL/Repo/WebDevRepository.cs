@@ -36,5 +36,24 @@ namespace WebDev.DAL.Repo
             }
             return result;
         }
+
+        public int PostNewProject(string projectName, string description, string gitUrl, int userId)
+        {
+            int result;
+            SqlParameter prmProjectName = new SqlParameter("@ProjectName", projectName);
+            SqlParameter prmProjectDescription = new SqlParameter("@Description", description);
+            SqlParameter prmGitUrl = new SqlParameter("@GitUrl", gitUrl);
+            SqlParameter prmUserId = new SqlParameter("@UserId", userId);
+            try
+            {
+                result = context.Database.ExecuteSqlRaw("EXEC dbo.usp_PostNewProject @ProjectName, @Description, @GitUrl, @UserId", new[] { prmProjectName, prmProjectDescription, prmGitUrl, prmUserId });
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                result = -99;
+            }
+            return (int)result;
+        }
     }
 }
