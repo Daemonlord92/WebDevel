@@ -4,7 +4,9 @@ Remastering my old web developer portfolio with C#/Angular/SQL Server.
 
 Using this I've been able to create quite a few stored procedures to create, edit, and delete items within the database. Will be creating some Table Value Functions to return info to the front.
 
-Repository is almost to start constructing the Controller. Going try to levrage the internal Database function in Entity Framework Core to help block who can create post in the app.
+Repository is almost to start constructing the Controller. Going try to leverage the internal Database function in Entity Framework Core to help block who can create post in the app.
+
+07/09/2022 Started working on the API. 
 
 ## SQL Stored Procedures:
 
@@ -33,3 +35,7 @@ DeleteProject(projectId, userId)
 PostNewBug(bugName, bugDescription, gitUrl, userId)
 
 EditBug(bugId, userId, bugName(nullable), bugDescription(nullable), gitUrl(nullable))
+
+## API Routes
+
+/apiv1/User/RegisterUser taking a User Object with a UserName, Password, Email.

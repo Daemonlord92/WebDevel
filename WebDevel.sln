@@ -31,7 +31,9 @@ Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "Developer-portfoilo-fe", "D
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebDev.DAL", "WebDev.DAL\WebDev.DAL.csproj", "{D7ACE2CF-176C-484A-A966-AA8F40E13774}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebDevTest", "WebDevTest\WebDevTest.csproj", "{45D4EBFB-DCB3-4CE2-931E-7EF7A9B6F800}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebDevTest", "WebDevTest\WebDevTest.csproj", "{45D4EBFB-DCB3-4CE2-931E-7EF7A9B6F800}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebDev.API", "WebDev.API\WebDev.API.csproj", "{C39E546B-E8EE-48CD-824E-27692304F6CE}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -51,6 +53,10 @@ Global
 		{45D4EBFB-DCB3-4CE2-931E-7EF7A9B6F800}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{45D4EBFB-DCB3-4CE2-931E-7EF7A9B6F800}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{45D4EBFB-DCB3-4CE2-931E-7EF7A9B6F800}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C39E546B-E8EE-48CD-824E-27692304F6CE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C39E546B-E8EE-48CD-824E-27692304F6CE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C39E546B-E8EE-48CD-824E-27692304F6CE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C39E546B-E8EE-48CD-824E-27692304F6CE}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
