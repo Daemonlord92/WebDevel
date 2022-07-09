@@ -1,4 +1,4 @@
-# Web Developer Portfolio App Test
+# Web Developer Portfolio App
 
 Remastering my old web developer portfolio with C#/Angular/SQL Server.
 
