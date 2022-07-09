@@ -20,3 +20,14 @@ usp_PostNewBug(@BugName(150), @BugDescription(300), @GitUrl(MAX), @UserId(3,0))
 
 usp_EditBug(@BugId(6,0), @BugName(150, nullable), @BugDecscription(300, nullable), @GitUrl(MAX, nullable), @UserId(3,0))
 
+## Repository Functions
+
+RegisterUser(username, password, emailId)
+
+PostNewProject(projectName, description, gitUrl, userId)
+
+EditProject(projectId, userId, projectName(nullable), description(nullable), gitUrl(nullable))
+
+DeleteProject(projectId, userId)
+
+PostNewBug(bugName, bugDescription, gitUrl, userId)
