@@ -31,3 +31,5 @@ EditProject(projectId, userId, projectName(nullable), description(nullable), git
 DeleteProject(projectId, userId)
 
 PostNewBug(bugName, bugDescription, gitUrl, userId)
+
+EditBug(bugId, userId, bugName(nullable), bugDescription(nullable), gitUrl(nullable))

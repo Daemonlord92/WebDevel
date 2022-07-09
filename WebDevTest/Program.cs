@@ -26,3 +26,8 @@ int status;
 //status = repository.PostNewBug("bug/Horrorbank app is rounding the decimal return", "The repository is rounding the result outputted by the database. Currently looking for reasons why, not much to report on.", "Private", 100);
 ///Console.WriteLine(status);
 #endregion
+
+#region EditBug
+//status = repository.EditBug(22, 100, "bug/private app is rounding the decimal upon calling the function in the repository.", null, null);
+//Console.WriteLine(status);
+#endregion
