@@ -7,22 +7,22 @@ namespace WebDev.API.Controllers
 {
     [Route("APIv1/[controller]/[action]")]
     [ApiController]
-    public class UserController : ControllerBase
+    public class ProjectController : ControllerBase
     {
         DAL.Repo.WebDevRepository repository;
 
-        public UserController()
+        public ProjectController()
         {
             repository = new DAL.Repo.WebDevRepository();
         }
 
         [HttpPost]
-        public int RegisterUser( User user )
+        public int PostNewProject(Project project)
         {
             int result;
             try
             {
-                result = repository.RegisterUser(user.UserName, user.Password, user.Email);
+                result = repository.PostNewProject(project.ProjectName, project.Description, project.GitUrl, project.UserId);
             }
             catch (Exception ex)
             {
@@ -31,6 +31,5 @@ namespace WebDev.API.Controllers
             }
             return result;
         }
-
     }
 }

@@ -38,4 +38,5 @@ EditBug(bugId, userId, bugName(nullable), bugDescription(nullable), gitUrl(nulla
 
 ## API Routes
 
-/apiv1/User/RegisterUser taking a User Object with a UserName, Password, Email.
+/APIv1/User/RegisterUser taking a User Object with a UserName, Password, Email.
+/APIv1/Project/PostNewProject taking a Project Object with ProjectName, Description, GitUrl, UserId.
