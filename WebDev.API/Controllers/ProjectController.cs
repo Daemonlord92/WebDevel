@@ -47,5 +47,11 @@ namespace WebDev.API.Controllers
             }
             return result;
         }
+
+        [HttpDelete]
+        public int DeleteProject(int projectId, int userId)
+        {
+            return repository.DeleteProject(projectId, userId);
+        }
     }
 }
