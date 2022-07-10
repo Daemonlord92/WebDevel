@@ -31,5 +31,21 @@ namespace WebDev.API.Controllers
             }
             return result;
         }
+
+        [HttpPut]
+        public int EditProject(Project project)
+        {
+            int result;
+            try
+            {
+                result = repository.EditProject(project.ProjectId, project.UserId, (project.ProjectName ?? null), (project.Description ?? null), (project.GitUrl ?? null));
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                result = -99;
+            }
+            return result;
+        }
     }
 }
