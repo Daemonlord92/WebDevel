@@ -8,13 +8,15 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { FooterComponent } from './component/static/footer/footer.component';
 import { HomeComponent } from './component/static/home/home.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { ContactMeComponent } from './component/static/contact-me/contact-me.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     NavbarComponent,
     FooterComponent,
-    HomeComponent
+    HomeComponent,
+    ContactMeComponent
   ],
   imports: [
     BrowserModule,
