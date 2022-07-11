@@ -47,3 +47,5 @@ EditBug(bugId, userId, bugName(nullable), bugDescription(nullable), gitUrl(nulla
 /APIv1/Project/DeleteProject taking a projectId and userId varibles.
 
 /APIv1/BugTracker/PostNewBug taking a Bug Object with a BugName, BugDescription, GitUrl, UserId.
+
+/APIv1/BugTracker/EditBug taking a Bug Object with a BugId, UserId, BugName, BugDescription, GitUrl.

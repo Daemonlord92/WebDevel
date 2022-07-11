@@ -25,12 +25,28 @@ namespace WebDev.API.Controllers
             {
                 result = repository.PostNewBug(bug.BugName, bug.BugDescription, bug.GitUrl, bug.UserId);
             }
-            catch (System.Exception ex)
+            catch (Exception ex)
             {
                 Console.WriteLine(ex.Message);
                 result = -99;
             }
             return result;
+        }
+
+        [HttpPut]
+        public int EditBug(Bug bug)
+        {
+            int results;
+            try
+            {
+                results = repository.EditBug(bug.BugId, bug.UserId, (bug.BugName ?? null), (bug.BugDescription ?? null), (bug.GitUrl ?? null));
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                results = -99;
+            }
+            return results;
         }
     }
 }
