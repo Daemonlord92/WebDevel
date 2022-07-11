@@ -8,6 +8,8 @@ Repository is almost to start constructing the Controller. Going try to leverage
 
 07/09/2022 Started working on the API. 
 
+07/11/2022 Started working on a brand new frontend, Using Angular.
+
 ## SQL Stored Procedures:
 
 usp_RegisterUser(@Username(50), @Password(300), @EmailId(300))
