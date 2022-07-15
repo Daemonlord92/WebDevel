@@ -44,6 +44,8 @@ EditBug(bugId, userId, bugName(nullable), bugDescription(nullable), gitUrl(nulla
 
 /APIv1/Project/PostNewProject taking a Project Object with ProjectName, Description, GitUrl, UserId.
 
+/APIv1/Project/GetAllProjects grabs all projects in the database WIP
+
 /APIv1/Project/EditProject taking a Project Object with ProjectId, UserId, ProjectName, Description, GitUrl.
 
 /APIv1/Project/DeleteProject taking a projectId and userId varibles.

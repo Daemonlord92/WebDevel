@@ -32,6 +32,22 @@ namespace WebDev.API.Controllers
             return result;
         }
 
+        [HttpGet]
+        public IActionResult GetAllProjects()
+        {
+            List<DAL.Models.Project> result;
+            try 
+	        {	        
+		        result = repository.GetAllProjects().ToList();
+	        }
+	        catch (Exception)
+	        {
+
+		        result = null;
+	        }
+            return new JsonResult(result);
+        }
+
         [HttpPut]
         public int EditProject(Project project)
         {

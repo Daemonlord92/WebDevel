@@ -57,6 +57,22 @@ namespace WebDev.DAL.Repo
             return (int)result;
         }
 
+        public List<Project> GetAllProjects()
+        {
+            List<Project> result = new List<Project>();
+
+            try 
+	        {	        
+		        result = context.Projects.ToList();
+	        }
+	        catch (Exception)
+	        {
+
+		        result = null;
+	        }
+            return result;
+        }
+
         public int EditProject(int projectId, int userId, string projectName = null, string description = null, string gitUrl = null)
         {
             int result;
