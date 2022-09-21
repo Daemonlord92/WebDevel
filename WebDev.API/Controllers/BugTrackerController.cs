@@ -17,6 +17,20 @@ namespace WebDev.API.Controllers
             repository = new DAL.Repo.WebDevRepository();
         }
 
+        [HttpGet]
+        public IActionResult GetAllBugs()
+        {
+            try
+            {
+                return Ok(repository.GetAllBugs());
+            }
+            catch (System.Exception)
+            {
+                
+                throw new Exception("Error WILL ROBERTSON ERROR");
+            }
+        }
+
         [HttpPost]
         public int PostNewBug(Bug bug)
         {

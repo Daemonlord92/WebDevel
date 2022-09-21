@@ -159,5 +159,12 @@ namespace WebDev.DAL.Repo
 
             return result;
         }
+
+        public List<BugTracker> GetAllBugs()
+        {
+            List<BugTracker> results = new List<BugTracker>();
+            results = context.BugTrackers.ToList();
+            return results;
+        }
     }
 }
